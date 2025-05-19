@@ -123,7 +123,7 @@ const getPriorityIcon = (priority: Task['priority']) => {
 </script>
 
 <template>
-  <div class="p-4 md:p-6 w-full">
+  <div class="h-[calc(100vh-64px)] flex flex-col p-4 md:p-6 w-full">
     <div class="flex flex-col sm:flex-row justify-between sm:items-center mb-6">
       <div>
         <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Project Tracker</h1>
@@ -146,7 +146,7 @@ const getPriorityIcon = (priority: Task['priority']) => {
         </UButton>
 
         <template #body>
-          <div class="space-y-4">
+          <div class="space-y-4 w-full">
             <UFormField
               label="Title"
               required
@@ -154,6 +154,7 @@ const getPriorityIcon = (priority: Task['priority']) => {
             >
               <UInput
                 v-model="newTask.title"
+                class="w-full"
                 placeholder="Enter task title"
                 autofocus
               />
@@ -165,6 +166,7 @@ const getPriorityIcon = (priority: Task['priority']) => {
             >
               <UTextarea
                 v-model="newTask.description"
+                class="w-full"
                 placeholder="Enter task description"
                 :rows="3"
               />
@@ -247,11 +249,11 @@ const getPriorityIcon = (priority: Task['priority']) => {
       </UModal>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 flex-1 min-h-0">
       <div
         v-for="column in columns"
         :key="column.id"
-        class="bg-gray-100 dark:bg-gray-800/50 rounded-lg p-4 border border-gray-200 dark:border-gray-700"
+        class="bg-gray-100 dark:bg-gray-800/50 rounded-lg p-4 border border-gray-200 dark:border-gray-700 flex flex-col"
       >
         <div class="flex items-center justify-between mb-4">
           <h2 class="text-lg font-semibold text-gray-900 dark:text-white">{{ column.title }}</h2>
@@ -269,7 +271,7 @@ const getPriorityIcon = (priority: Task['priority']) => {
           :group="{ name: 'tasks' }"
           item-key="id"
           :data-column-id="column.id"
-          class="space-y-3 min-h-[200px]"
+          class="space-y-3 flex-1 overflow-y-auto"
           @end="onDragEnd"
         >
           <template #item="{ element }">
